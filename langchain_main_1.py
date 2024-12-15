@@ -5,8 +5,16 @@ from langchain_ollama import ChatOllama
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import  ChatPromptTemplate
 
+import API_Wikipedia
+from API_Wikipedia import wiki
+
 #VARIABLES
 
+input = input("Cosa vuoi cercare su Wikipedia?")
+
+wiki = API_Wikipedia.WikipediaAPIHandler(language='it')
+sommario = wiki.get_page_summary(input)
+print(sommario)
 
 
 
@@ -20,7 +28,6 @@ if __name__=="__main__":
 
 
     # Stampare la variabile globale per verificarne il contenuto
-    print("Pippo3")
     summary_template=(f"date le informazioni {informations} voglio creare: "
                       f"1. un piccolo summary"
                       f"2. fatti interessanti che la riguardano")
@@ -34,3 +41,4 @@ if __name__=="__main__":
     response = chain.invoke(input={"informations":informations})
     print(f"il type di response è: {type(response)}")
     print(response)
+exit()
